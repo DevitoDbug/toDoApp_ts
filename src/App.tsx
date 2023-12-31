@@ -1,11 +1,14 @@
-import "./App.css";
+import React from "react";
+import "./styles/app.scss";
+import Input from "./components/Input";
 
-function App() {
+const App: React.FC = () => {
   return (
-    <>
-      <div>Hello world</div>
-    </>
+    <div>
+      <h2>Hello world</h2>
+      <Input />
+    </div>
   );
-}
+};
 
 export default App;
