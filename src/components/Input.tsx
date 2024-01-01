@@ -1,34 +1,37 @@
-import React, {
-  ChangeEventHandler,
-  FormEventHandler,
-  useContext,
-  useState,
-} from "react";
+import React, { FormEventHandler, useContext, useState } from "react";
 import "../styles/input.scss";
-import { TaskContext } from "../context/TaskContex";
+import { TaskContext, Task } from "../context/TaskContex";
 
 const Input: React.FC = () => {
-  const [task, setTask] = useState<string>("");
+  const [task, setTask] = useState<Task>({
+    name: "",
+    status: false,
+  });
   const { setTasks } = useContext(TaskContext);
 
-  const handleInputTask: ChangeEventHandler<HTMLInputElement> = (event) => {
-    setTask(event.target.value.trim());
-  };
   const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
-    if (task.length > 0) {
-      setTasks((previous: string[]) => [...previous, task]);
+    if (task.name.length > 0) {
+      setTasks((prev: Task[]) => [...prev, task]);
     }
-    setTask("");
   };
   return (
     <form onSubmit={handleSubmit}>
       <input
-        onChange={handleInputTask}
+        onChange={(e) =>
+          setTask((prev: Task) => ({ ...prev, name: e.target.value }))
+        }
         type="text"
         placeholder="Enter a task"
-        value={task}
+        value={task.name}
       />
+      {/* <button
+        onClick={() =>
+          setTask((prev: Task) => ({ ...prev, status: !prev.status }))
+        }
+      >
+        Done
+      </button> */}
       <button type="submit">Add</button>
     </form>
   );

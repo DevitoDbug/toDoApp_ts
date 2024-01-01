@@ -2,6 +2,7 @@ import React from "react";
 import TaskContextProvider from "./context/TaskContex";
 import "./styles/app.scss";
 import Input from "./components/Input";
+import TaskArea from "./components/TaskArea";
 
 const App: React.FC = () => {
   return (
@@ -9,6 +10,7 @@ const App: React.FC = () => {
       <div>
         <h2>To Do App!</h2>
         <Input />
+        <TaskArea />
       </div>
     </TaskContextProvider>
   );

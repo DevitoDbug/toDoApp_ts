@@ -4,9 +4,14 @@ type TaskContextProp = {
   children: React.ReactNode;
 };
 
+export type Task = {
+  name: string;
+  status: boolean;
+};
+
 export type TaskContextValue = {
-  tasks: string[];
-  setTasks: React.Dispatch<React.SetStateAction<string[]>>;
+  tasks: Task[];
+  setTasks: React.Dispatch<React.SetStateAction<Task[]>>;
 };
 
 export const TaskContext = createContext<TaskContextValue>({
@@ -15,7 +20,7 @@ export const TaskContext = createContext<TaskContextValue>({
 });
 
 const TaskContextProvider: FC<TaskContextProp> = ({ children }) => {
-  const [tasks, setTasks] = useState<string[]>([]);
+  const [tasks, setTasks] = useState<Task[]>([]);
   const contextValue: TaskContextValue = {
     tasks,
     setTasks,
