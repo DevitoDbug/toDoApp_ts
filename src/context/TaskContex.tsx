@@ -7,16 +7,19 @@ type TaskContextProp = {
 export type Task = {
   name: string;
   status: boolean;
+  id: number;
 };
 
 export type TaskContextValue = {
   tasks: Task[];
   setTasks: React.Dispatch<React.SetStateAction<Task[]>>;
+  id: number;
 };
 
 export const TaskContext = createContext<TaskContextValue>({
   tasks: [],
   setTasks: () => {},
+  id: -1,
 });
 
 const TaskContextProvider: FC<TaskContextProp> = ({ children }) => {
@@ -24,6 +27,7 @@ const TaskContextProvider: FC<TaskContextProp> = ({ children }) => {
   const contextValue: TaskContextValue = {
     tasks,
     setTasks,
+    id: -1,
   };
   return (
     <TaskContext.Provider value={contextValue}>{children}</TaskContext.Provider>

@@ -6,14 +6,17 @@ const Input: React.FC = () => {
   const [task, setTask] = useState<Task>({
     name: "",
     status: false,
+    id: -1,
   });
-  const { setTasks } = useContext(TaskContext);
+  const { tasks, setTasks } = useContext(TaskContext);
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
     if (task.name.length > 0) {
+      setTask((prev: Task) => ({ ...prev, id: tasks.length }));
       setTasks((prev: Task[]) => [...prev, task]);
     }
+    setTask((prev: Task) => ({ ...prev, name: "" }));
   };
   return (
     <form onSubmit={handleSubmit}>
@@ -25,13 +28,6 @@ const Input: React.FC = () => {
         placeholder="Enter a task"
         value={task.name}
       />
-      {/* <button
-        onClick={() =>
-          setTask((prev: Task) => ({ ...prev, status: !prev.status }))
-        }
-      >
-        Done
-      </button> */}
       <button type="submit">Add</button>
     </form>
   );
