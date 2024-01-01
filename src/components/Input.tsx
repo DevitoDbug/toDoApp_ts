@@ -1,4 +1,5 @@
 import React, { ChangeEventHandler, FormEventHandler, useState } from "react";
+import "../styles/input.scss";
 
 const Input: React.FC = () => {
   const [task, setTask] = useState<string>("");
