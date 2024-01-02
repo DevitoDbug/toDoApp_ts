@@ -8,6 +8,16 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  .editTextContainer {
+    align-items: flex-start;
+    justify-content: flex-start;
+    .editTextInputBox {
+      background-color: white;
+      color: #333333;
+      border-radius: 0.5rem;
+      height: auto;
+    }
+  }
   .taskDescription {
     padding: 2px;
     justify-content: center;
