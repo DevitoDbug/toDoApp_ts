@@ -47,6 +47,12 @@ const TaskComponent: FC<Task> = (task) => {
     }
   };
 
+  const handleDeleteTask = () => {
+    setTasks((prevArry: Task[]) => {
+      return prevArry.filter((element) => element.id !== task.id);
+    });
+  };
+
   useEffect(() => {
     const handleClickOutsideEditBox = (event: MouseEvent) => {
       if (editRef.current && !editRef.current.contains(event.target as Node)) {
@@ -67,7 +73,10 @@ const TaskComponent: FC<Task> = (task) => {
   }, [showEditBox, task.name]);
 
   return (
-    <div className="taskContainer" ref={editRef}>
+    <div
+      className={`taskContainer ${task.completed && "completedTask"}`}
+      ref={editRef}
+    >
       {showEditBox ? (
         <form className="editTextContainer" onSubmit={handleSubmitEditedTask}>
           <input
@@ -81,19 +90,32 @@ const TaskComponent: FC<Task> = (task) => {
         <span className="taskDescription">{task.name}</span>
       )}
       <div className="buttonArea">
-        <button onClick={handleToggleStatus}>
+        <button
+          className={`${task.completed && "completedTaskButton"}`}
+          onClick={handleToggleStatus}
+        >
           {task.completed ? (
-            <FontAwesomeIcon icon={faCheck} />
-          ) : (
             <FontAwesomeIcon icon={faClose} />
+          ) : (
+            <FontAwesomeIcon icon={faCheck} />
           )}
         </button>
-        <button>
-          <FontAwesomeIcon className="icons " icon={faTrash} />
+
+        <button
+          className={`${task.completed && "completedTaskButton"}`}
+          onClick={handleDeleteTask}
+        >
+          <FontAwesomeIcon icon={faTrash} />
         </button>
-        <button onClick={handleEditTask}>
-          <FontAwesomeIcon className="" icon={faEdit} />
-        </button>
+
+        {!task.completed && (
+          <button
+            className={`${task.completed && "completedTaskButton"}`}
+            onClick={handleEditTask}
+          >
+            <FontAwesomeIcon icon={faEdit} />
+          </button>
+        )}
       </div>
     </div>
   );
