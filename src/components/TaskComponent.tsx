@@ -22,6 +22,7 @@ const TaskComponent: FC<Task> = (task) => {
   const [showEditBox, setShowEditBox] = useState<boolean>(false);
   const [edits, setEdits] = useState<string>("");
   const editRef = useRef<HTMLDivElement>(null);
+  const inputFocusRef = useRef<HTMLInputElement>(null);
 
   const handleToggleStatus = () => {
     setTasks((prev: Task[]) => {
@@ -72,6 +73,12 @@ const TaskComponent: FC<Task> = (task) => {
     };
   }, [showEditBox, task.name]);
 
+  useEffect(() => {
+    if (showEditBox && inputFocusRef.current) {
+      inputFocusRef.current.focus();
+    }
+  }, [showEditBox]);
+
   return (
     <div
       className={`taskContainer ${task.completed && "completedTask"}`}
@@ -80,6 +87,7 @@ const TaskComponent: FC<Task> = (task) => {
       {showEditBox ? (
         <form className="editTextContainer" onSubmit={handleSubmitEditedTask}>
           <input
+            ref={inputFocusRef}
             className="editTextInputBox"
             onChange={(e) => setEdits(e.target.value)}
             placeholder="Enter text..."

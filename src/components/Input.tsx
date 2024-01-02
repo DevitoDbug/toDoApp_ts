@@ -1,9 +1,4 @@
-import React, {
-  FormEventHandler,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import React, { FormEventHandler, useContext, useState } from "react";
 import "../styles/input.scss";
 import { TaskContext, Task } from "../context/TaskContex";
 
@@ -13,7 +8,7 @@ const Input: React.FC = () => {
     completed: false,
     id: -1,
   });
-  const { tasks, setTasks } = useContext(TaskContext);
+  const { setTasks } = useContext(TaskContext);
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
@@ -25,10 +20,6 @@ const Input: React.FC = () => {
     }
     setTask((prev: Task) => ({ ...prev, name: "" }));
   };
-
-  useEffect(() => {
-    console.log(tasks);
-  }, [tasks]);
   return (
     <form onSubmit={handleSubmit}>
       <input
