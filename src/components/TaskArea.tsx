@@ -1,19 +1,21 @@
 import { useContext } from "react";
 import "../styles/taskArea.scss";
-import Task from "./TaskComponent";
+import TaskComponent from "./TaskComponent";
 import { TaskContext } from "../context/TaskContex";
 const TaskArea = () => {
   const { tasks } = useContext(TaskContext);
   return (
     <div className="taskArea">
-      {tasks.map((task) => (
-        <Task
-          key={task.id}
-          name={task.name}
-          status={task.status}
-          id={task.id}
-        />
-      ))}
+      {tasks
+        .sort((a, b) => b.id - a.id)
+        .map((task) => (
+          <TaskComponent
+            key={task.id}
+            name={task.name}
+            completed={task.completed}
+            id={task.id}
+          />
+        ))}
     </div>
   );
 };

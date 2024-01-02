@@ -1,11 +1,16 @@
-import React, { FormEventHandler, useContext, useState } from "react";
+import React, {
+  FormEventHandler,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import "../styles/input.scss";
 import { TaskContext, Task } from "../context/TaskContex";
 
 const Input: React.FC = () => {
   const [task, setTask] = useState<Task>({
     name: "",
-    status: false,
+    completed: false,
     id: -1,
   });
   const { tasks, setTasks } = useContext(TaskContext);
@@ -13,11 +18,17 @@ const Input: React.FC = () => {
   const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
     if (task.name.length > 0) {
-      setTask((prev: Task) => ({ ...prev, id: tasks.length }));
-      setTasks((prev: Task[]) => [...prev, task]);
+      setTasks((prev: Task[]) => [
+        ...prev,
+        { name: task.name, completed: task.completed, id: prev.length },
+      ]);
     }
     setTask((prev: Task) => ({ ...prev, name: "" }));
   };
+
+  useEffect(() => {
+    console.log(tasks);
+  }, [tasks]);
   return (
     <form onSubmit={handleSubmit}>
       <input

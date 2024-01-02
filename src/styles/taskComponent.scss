@@ -1,7 +1,7 @@
 .taskContainer {
   background-color: #00ffff;
   color: #333333;
-  height: 5rem;
+  height: 4rem;
   width: 80%;
   border-radius: 0.5rem;
   padding: 0.2rem 0.5rem;
@@ -9,4 +9,10 @@
   flex-direction: row;
   justify-content: space-between;
   text-align: left;
+  .toggleTaskStatusButton {
+    border-radius: 8px;
+    outline: none;
+    border: none;
+    padding: 0.3rem 0.5rem;
+  }
 }

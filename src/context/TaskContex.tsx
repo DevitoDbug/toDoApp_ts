@@ -6,7 +6,7 @@ type TaskContextProp = {
 
 export type Task = {
   name: string;
-  status: boolean;
+  completed: boolean;
   id: number;
 };
 
