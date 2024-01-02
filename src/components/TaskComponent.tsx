@@ -1,4 +1,12 @@
 import { FC, useContext } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faCheck,
+  faClose,
+  faEdit,
+  faTrash,
+} from "@fortawesome/free-solid-svg-icons";
+
 import { Task, TaskContext } from "../context/TaskContex";
 import "../styles/taskComponent.scss";
 
@@ -8,17 +16,29 @@ const TaskComponent: FC<Task> = (task) => {
   const handleToggleStatus = () => {
     setTasks((prev: Task[]) => {
       return prev.map((item: Task) =>
-        item.id === task.id ? { ...item, completed: !item.completed } : item
+        item.id === task.id ? { ...item, completed: !item.completed } : item,
       );
     });
   };
 
   return (
     <div className="taskContainer">
-      <span>{task.name}</span>
-      <button className="toggleTaskStatusButton" onClick={handleToggleStatus}>
-        {String(task.completed)}
-      </button>
+      <span className="taskDescription">{task.name}</span>
+      <div className="buttonArea">
+        <button onClick={handleToggleStatus}>
+          {task.completed ? (
+            <FontAwesomeIcon icon={faCheck} />
+          ) : (
+            <FontAwesomeIcon icon={faClose} />
+          )}
+        </button>
+        <button>
+          <FontAwesomeIcon className="icons " icon={faTrash} />
+        </button>
+        <button>
+          <FontAwesomeIcon className="" icon={faEdit} />
+        </button>
+      </div>
     </div>
   );
 };

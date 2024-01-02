@@ -7,7 +7,7 @@ import TaskArea from "./components/TaskArea";
 const App: React.FC = () => {
   return (
     <TaskContextProvider>
-      <div>
+      <div className="mainContainer">
         <h2>To Do App!</h2>
         <Input />
         <TaskArea />
